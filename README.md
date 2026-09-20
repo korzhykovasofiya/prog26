@@ -1,3 +1,3 @@
-# HELLO
+# Programming course
 
-There will be something something.
+This repository contains projects and other.
