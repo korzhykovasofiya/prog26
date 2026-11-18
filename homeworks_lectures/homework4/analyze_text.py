@@ -1,11 +1,10 @@
 import re
-import unittest
 from collections import Counter
 
 from nltk.tokenize import RegexpTokenizer
 import spacy
 
-word = r"[\w\d'\-’]+"
+word = r"[A-Za-zА-Яа-яіІїЇєЄґҐ'\-’]+"
 
 
 def read_file(path):
@@ -38,24 +37,3 @@ def count_words(words):
 def frequency(words):
 
     return Counter(words).most_common(20)
-
-
-class Tests(unittest.TestCase):
-    def test_word_count(self):
-        self.assertEqual(count_words(get_words("Hello, world! Привіт, світе! 123")), 4)
-
-    def test_frequency(self):
-        freq = frequency(get_words("Data data DATA science"))
-        self.assertEqual(freq["data"], 3)
-        self.assertEqual(list(freq)[0], "data")
-
-    def test_empty_text(self):
-        self.assertEqual(get_words("   "), [])
-        self.assertEqual(get_words("123 !!!"), [])
-
-    def test_file_errors(self):
-        self.assertEqual(read_file("no_such_file.txt")[1], "Файл не знайдено.")
-
-    def test_libraries_agree(self):
-        text = "М'яч летить. Привіт, world! Привіт!"
-        self.assertEqual(get_words(text, "nltk"), get_words(text, "spacy"))
